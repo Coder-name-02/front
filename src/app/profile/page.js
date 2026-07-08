@@ -9,8 +9,9 @@ export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-console.log("SESSION:", session);
-console.log("SESSION USER:", session?.user);
+// console.log("SESSION:", session);
+// console.log("SESSION USER:", session?.user);
+
   // Redirect to signin if not authenticated
   useEffect(() => {
     if (status === "unauthenticated") {
