@@ -13,36 +13,12 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 //password
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError(null);
-  //   setLoading(true);
-  //   try {
-  //     const result = await signIn("credentials", {
-  //       redirect: false,
-  //       email,
-  //       password,
-  //     });
-
-  //     if (result.ok) {
-  //       alert("Signed in successfully!");
-  //       router.push("/");
-  //       router.refresh();
-  //     } else {
-  //       // setError(result.error || "Failed to sign in. Please check your credentials.");
-  //         setError("Failed to sign in.Wrong Password or Email.");
-  //     }
-  //   } catch (err) {
-  //     setError("An error occurred. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+    
+  };
 
 //google login
-// const handleGoogleLogin = async () => {
-//   await signIn("google", { callbackUrl: "/" });
-// };
+
 
   return (
     <div className={styles.authWrapper}>

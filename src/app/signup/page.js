@@ -13,45 +13,14 @@ export default function SignUp() {
   const [loading, setLoading] = useState(false);
 
   // password signup
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setError(null);
-    
-  //   if (password !== passwordConfirm) {
-  //     setError("Passwords do not match");
-  //     return;
-  //   }
-    
-  //   setLoading(true);
-  //   try {
-  //     const response = await fetch("/api/v1/auth/sign_up", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ 
-  //         username, 
-  //         email, 
-  //         password, 
-  //         password_confirmation: passwordConfirm 
-  //       }),
-  //     });
-  //     if (response.ok) {
-  //       alert("Account created successfully!");
-  //       router.push('/signin');
-  //     } else {
-  //       const data = await response.json();
-  //       setError(data.errors?.full_messages?.[0] || data.message || "Failed to sign up");
-  //     }
-  //   } catch (err) {
-  //     setError("An error occurred. Please try again.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleSubmit = async (e) => {
+
+  };
 
   // google login
-//  const handleGoogleLogin = async () => {
-//    await signIn("google", { callbackUrl: "/" });
-//  };
+ const handleGoogleLogin = async () => {
+   
+ };
 
   return (
     <div className={styles.authWrapper}>

@@ -79,7 +79,7 @@ export default function CarouselViewer() {
           const SlideImage = (
             <img
               src={slide.image_url}
-              className="d-block w-100 object-fit-cover"
+              className="d-block w-100 object-fit-fill"
               style={{ height: "400px", minHeight: "300px" }}
               alt={`Slide ${index + 1}`}
             />

@@ -17,8 +17,6 @@ export default function BrandPage() {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState("time");
   
-  // We don't filter by brand or category in the UI here because it's already scoped to a brand
-  
   // Resolve brand name from slug
   const allBrands = Array.from(new Set(categoryOptions.flatMap((cat) => cat.brands)));
   const brandName = slugToBrand(params.brand, allBrands);
@@ -45,7 +43,7 @@ export default function BrandPage() {
 
   useEffect(() => {
     if (!brandName) {
-      // If the URL slug doesn't match any known brand, redirect to home
+      // if the Url slug doesnt match brand, redirect to home
       router.replace("/");
       return;
     }
@@ -65,7 +63,7 @@ export default function BrandPage() {
       </div>
 
       <div className="mb-4">
-        {/* We reuse ProductFilters but hide the brand/category dropdowns since they are fixed */}
+        {/* reuse ProductFilters,hide the brand/category dropdowns*/}
         <div className="card shadow-sm border-0" style={{ borderRadius: "12px" }}>
           <div className="card-body p-3">
             <div className="row g-3 align-items-center">

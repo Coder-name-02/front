@@ -9,10 +9,7 @@ export default function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-// console.log("SESSION:", session);
-// console.log("SESSION USER:", session?.user);
-
-  // Redirect to signin if not authenticated
+  // Redirect signin if not login
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/signin");
@@ -50,14 +47,14 @@ export default function ProfilePage() {
       <div className="row justify-content-center">
         <div className="col-md-8 col-lg-6">
           <div className="card shadow-lg border-0 rounded-4 overflow-hidden">
-            {/* Gradient Header Banner */}
+            {/* Header  */}
             <div 
               className="p-5 text-center text-white position-relative" 
               style={{
                 background: "linear-gradient(135deg, #764ba2 0%, #667eea 100%)"
               }}
             >
-              {/* Profile Avatar */}
+              {/* profile */}
               <div 
                 className="rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-md border border-white border-3 mb-3 bg-white text-primary"
                 style={{
@@ -78,7 +75,7 @@ export default function ProfilePage() {
               </span>
             </div>
 
-            {/* Profile Info Details */}
+            {/* Profile Info */}
             <div className="card-body p-4 bg-white">
               <h5 className="mb-4 fw-bold text-dark border-bottom pb-2">Profile Details</h5>
               
@@ -119,7 +116,7 @@ export default function ProfilePage() {
                 </div>
               )}
 
-              {/* Action Buttons */}
+              {/* logout Buttons */}
               <div className="d-grid gap-2 mt-5">
                 <button 
                   className="btn btn-outline-danger py-2 rounded-pill fw-semibold"

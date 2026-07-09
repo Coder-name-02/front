@@ -37,7 +37,7 @@ export default function CartPage() {
   // Extract products from cart items
   let products = cart.map((item) => ({
     ...item.product,
-    id: item.product_id, // ensure product has correct ID for routing
+    id: item.product_id, // make sure product has correct id for routing
   }));
 
   // Apply frontend filters

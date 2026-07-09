@@ -23,64 +23,64 @@ export default function ProductDetailPage() {
   const { isInCart, toggleCartItem } = useCart();
   const isAdmin = session?.user?.role === "admin";
 
-  //fetchProduct
-  // useEffect(() => {
-  //   const fetchProduct = async () => {
-  //     try {
-  //       const response = await fetch(`${API_URL}/api/v1/products/${id}`);
-  //       if (!response.ok) {
-  //         throw new Error("Product not found");
-  //       }
-  //       const data = await response.json();
-  //       setProduct(data);
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  // fetchProduct
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/v1/products/${id}`);
+        if (!response.ok) {
+          throw new Error("Product not found");
+        }
+        const data = await response.json();
+        setProduct(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchProduct();
-  // }, [id]);
+    fetchProduct();
+  }, [id]);
 
   //handleDelete
-  // const handleDelete = async () => {
-  //   if (!window.confirm("Are you sure you want to delete this product?")) return;
+  const handleDelete = async () => {
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
 
-  //   try {
-  //     const headers = await getAuthHeaders(session);
-  //     if (!headers) {
-  //       alert("Please log in first.");
-  //       return;
-  //     }
+    try {
+      const headers = await getAuthHeaders(session);
+      if (!headers) {
+        alert("Please log in first.");
+        return;
+      }
 
-  //     const response = await fetch(`${API_URL}/api/v1/products/${id}`, {
-  //       method: "DELETE",
-  //       headers,
-  //     });
+      const response = await fetch(`${API_URL}/api/v1/products/${id}`, {
+        method: "DELETE",
+        headers,
+      });
 
-  //     if (await handleAuthError(response)) return;
+      if (await handleAuthError(response)) return;
 
-  //     if (response.ok) {
-  //       alert("Product deleted successfully");
-  //       router.push("/dashboard");
-  //     } else {
-  //       const errData = await response.json().catch(() => ({}));
-  //       alert(errData.error || "Failed to delete product");
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert("Error deleting product");
-  //   }
-  // };
+      if (response.ok) {
+        alert("Product deleted successfully");
+        router.push("/dashboard");
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        alert(errData.error || "Failed to delete product");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error deleting product");
+    }
+  };
 
-  //handle toggle cart
-  // const handleToggleCart = async () => {
-  //   if (isUpdatingCart) return;
-  //   setIsUpdatingCart(true);
-  //   await toggleCartItem(product.id);
-  //   setIsUpdatingCart(false);
-  // };
+  // toggle cartitem
+  const handleToggleCart = async () => {
+    if (isUpdatingCart) return;
+    setIsUpdatingCart(true);
+    await toggleCartItem(product.id);
+    setIsUpdatingCart(false);
+  };
 
   if (loading) {
     return (
