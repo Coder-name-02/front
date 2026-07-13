@@ -6,18 +6,45 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function SignIn() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
 //password
   const handleSubmit = async (e) => {
-    
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (result.ok) {
+        alert("Signed in successfully!");
+        router.push("/");
+        router.refresh();
+      } else {
+        // setError(result.error || "Failed to sign in. Please check your credentials.");
+          setError("Failed to sign in.Wrong Password or Email.");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
 //google login
+const handleGoogleLogin = async () => {
+  await signIn("google", { callbackUrl: "/" });
+};
 
 
   return (
@@ -70,18 +97,6 @@ export default function SignIn() {
                 </div>
               </div>
 
-              {/* <div className="d-flex justify-content-between mb-4 mt-2">
-                <div className="form-check">
-                  <input type="checkbox" className="form-check-input" id="rememberMe" />
-                  <label className="form-check-label text-muted small" htmlFor="rememberMe">
-                    Remember me
-                  </label>
-                </div>
-                <a href="#" className="text-decoration-none small" style={{ color: '#764ba2' }}>
-                  Forgot password?
-                </a>
-              </div> */}
-              
               <button 
                 type="submit" 
                 className={`w-100 ${styles.btnPrimary}`}
@@ -89,6 +104,7 @@ export default function SignIn() {
               >
                 {loading ? "Signing in..." : "Sign In"}
               </button>
+              
             </form>
 
             <div className={styles.divider}>OR CONTINUE WITH</div>

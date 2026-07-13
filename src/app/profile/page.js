@@ -96,12 +96,12 @@ export default function ProfilePage() {
                 </div>
               </div>
 
-              {user.id && (
+              {/* {user.id && (
                 <div className="mb-3">
                   <label className="text-muted small text-uppercase fw-bold d-block">Account ID</label>
                   <div className="text-monospace small text-muted">{user.id}</div>
                 </div>
-              )}
+              )} */}
 
               {user.created_at && (
                 <div className="mb-3">

@@ -1,8 +1,10 @@
-"use client";
+ "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "../auth.module.css";
 import { signIn } from "next-auth/react";
+
 export default function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -11,16 +13,49 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   // password signup
   const handleSubmit = async (e) => {
-
+    e.preventDefault();
+    setError(null);
+    
+    if (password !== passwordConfirm) {
+      setError("Passwords do not match");
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      const response = await fetch("/api/v1/auth/sign_up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          username, 
+          email, 
+          password, 
+          password_confirmation: passwordConfirm 
+        }),
+      });
+      if (response.ok) {
+        alert("Account created successfully!");
+        router.push('/signin');
+      } else {
+        const data = await response.json();
+        setError(data.errors?.full_messages?.[0] || data.message || "Failed to sign up");
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // google login
  const handleGoogleLogin = async () => {
-   
+   await signIn("google", { callbackUrl: "/" });
  };
+
 
   return (
     <div className={styles.authWrapper}>
