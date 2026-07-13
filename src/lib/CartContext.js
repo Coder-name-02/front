@@ -10,7 +10,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 const CartContext = createContext({
   cart: [],
   cartCount: 0,
-  subtotal: 0,
   loading: false,
   fetchCart: () => {},
   toggleCartItem: () => {},
@@ -23,14 +22,12 @@ export function CartProvider({ children }) {
   const { data: session, status } = useSession();
   const [cart, setCart] = useState([]);
   const [cartCount, setCartCount] = useState(0);
-  const [subtotal, setSubtotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const fetchCart = useCallback(async () => {
     if (status !== "authenticated") {
       setCart([]);
       setCartCount(0);
-      setSubtotal(0);
       return;
     }
 
@@ -46,7 +43,6 @@ export function CartProvider({ children }) {
         const data = await res.json();
         setCart(data.items || []);
         setCartCount(data.total_items || 0);
-        setSubtotal(data.subtotal || 0);
       }
     } catch (err) {
       console.error("Failed to fetch cart:", err);
@@ -83,7 +79,6 @@ export function CartProvider({ children }) {
         const data = await res.json();
         setCart(data.cart.items || []);
         setCartCount(data.cart.total_items || 0);
-        setSubtotal(data.cart.subtotal || 0);
         return { added: data.added };
       } else {
         const errData = await res.json().catch(() => ({}));
@@ -114,7 +109,6 @@ export function CartProvider({ children }) {
         const data = await res.json();
         setCart(data.items || []);
         setCartCount(data.total_items || 0);
-        setSubtotal(data.subtotal || 0);
       }
     } catch (err) {
       console.error("Update cart item failed:", err);
@@ -138,7 +132,6 @@ export function CartProvider({ children }) {
         const data = await res.json();
         setCart(data.items || []);
         setCartCount(data.total_items || 0);
-        setSubtotal(data.subtotal || 0);
       }
     } catch (err) {
       console.error("Remove from cart failed:", err);
@@ -155,7 +148,6 @@ export function CartProvider({ children }) {
       value={{
         cart,
         cartCount,
-        subtotal,
         loading,
         fetchCart,
         toggleCartItem,
