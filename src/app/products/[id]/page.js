@@ -43,7 +43,7 @@ export default function ProductDetailPage() {
     fetchProduct();
   }, [id]);
 
-  handleDelete
+  //handleDelete
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
