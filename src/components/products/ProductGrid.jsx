@@ -28,7 +28,7 @@ export default function ProductGrid({
   }
 
   return (
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">
+    <div className="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">
       {products.map((product) => (
         <div className="col" key={product.id}>
           <ProductCard

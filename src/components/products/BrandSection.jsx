@@ -17,7 +17,7 @@ export default function BrandSection({ brandName }) {
         const params = new URLSearchParams();
         params.append("brand", brandName);
         params.append("sort_by", "time");
-        params.append("limit", "20"); // Fetch newest 20
+        params.append("limit", "10"); // Fetch newest 10 instead of 20 to avoid excessive height in grid
 
         const res = await fetch(`${API_URL}/api/v1/products?${params.toString()}`);
         if (res.ok) {
@@ -63,23 +63,9 @@ export default function BrandSection({ brandName }) {
         </Link>
       </div>
 
-      <div 
-        className="d-flex gap-4 pb-3" 
-        style={{ 
-          overflowX: "auto", 
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch"
-        }}
-      >
+      <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 pb-3">
         {products.map((product) => (
-          <div 
-            key={product.id} 
-            style={{ 
-              minWidth: "220px", 
-              width: "220px",
-              scrollSnapAlign: "start" 
-            }}
-          >
+          <div key={product.id} className="col">
             <ProductCard product={product} />
           </div>
         ))}

@@ -102,7 +102,7 @@ const menuItems = [
   },
 ];
 
-export default function Sidebar({ isOpen }) {
+export default function Sidebar({ isOpen, onClose }) {
   const pathname = usePathname();
   
   // Track which dropdown is currently expanded
@@ -132,18 +132,14 @@ export default function Sidebar({ isOpen }) {
   };
 
   return (
+    <>
+    {/* Backdrop for mobile */}
+    <div
+      className={`sidebar-backdrop ${isOpen ? "show" : ""}`}
+      onClick={onClose}
+    />
     <aside
-      className="bg-white border-end sticky-top text-black"
-      style={{
-        width: isOpen ? "300px" : "0px",
-        transition: "width 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-        overflowX: "hidden",
-        overflowY: "auto",
-        whiteSpace: "nowrap",
-        height: "calc(100vh - 57px)",
-        top: "57px",
-        alignSelf: "flex-start",
-      }}
+      className={`sidebar text-black ${isOpen ? "open" : ""}`}
     >
       <div className="p-3" style={{ width: "260px" }}>
         <p className="text-muted text-uppercase small fw-bold px-2 mb-3">
@@ -212,5 +208,6 @@ export default function Sidebar({ isOpen }) {
         </ul>
       </div>
     </aside>
+    </>
   );
 }

@@ -23,10 +23,10 @@ export default function LayoutWrapper({ children }) {
         {/* Main Body Section */}
         <div className="d-flex flex-grow-1" style={{ position: "relative" }}>
           {/* Navigation Sidebar */}
-          <Sidebar isOpen={sidebarOpen} />
+          <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
           {/* Content Viewport (Main Content + Footer) */}
           <div className="d-flex flex-column flex-grow-1 min-vw-0">
-            <main className="p-4 flex-grow-1 bg-light">
+            <main className="p-2 flex-grow-1 bg-light">
               {children}
             </main>
             {/* Bottom Footer */}
